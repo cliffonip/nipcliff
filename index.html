@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - CLIFF | Creative Law and Intellectual Property Finance Forum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #1a237e;
+      --navy2:  #0d1554;
+      --red:    #d32f2f;
+      --gold:   #d32f2f;
+      --light:  #eef0fb;
+      --text:   #1c1c2e;
+      --muted:  #5c6080;
+      --white:  #ffffff;
+      --bg:     #f7f8ff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      padding: 0 48px; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-img { width: 52px; height: 52px; object-fit: contain; }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .logo-text .cliff { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--navy); }
+    .logo-text .sub { font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; max-width: 160px; }
+    .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; transition: color 0.2s; }
+    .nav-links a.active { color: var(--navy); border-bottom: 2px solid var(--red); padding-bottom: 2px; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-links .has-dd::after { content: '▾'; margin-left: 3px; font-size: 10px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: white; z-index: 999; padding: 20px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; padding: 14px 30px; font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu a.active { color: var(--navy); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px;
+      background: var(--navy2); overflow: hidden;
+      display: flex; align-items: flex-end; padding-bottom: 90px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600&q=80') center/cover no-repeat;
+      filter: brightness(0.3);
+    }
+    .hero-rings {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        radial-gradient(circle at 70% 50%, rgba(211,47,47,0.12) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Ccircle cx='350' cy='350' r='320' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1.5'/%3E%3Ccircle cx='350' cy='350' r='260' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1.5'/%3E%3Ccircle cx='350' cy='350' r='200' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-size: auto, 700px;
+      background-position: center, center;
+      background-repeat: no-repeat, no-repeat;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 660px; padding: 0 64px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(211,47,47,0.2); border: 1px solid rgba(211,47,47,0.4);
+      color: rgba(255,255,255,0.75); font-size: 12px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: 6px 16px; border-radius: 50px;
+      margin-bottom: 22px;
+    }
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800; color: white; line-height: 1.15;
+      margin-bottom: 20px; letter-spacing: -0.5px;
+    }
+    .hero-content h1 span { color: #d32f2f; }
+    .hero-content p { font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 36px; max-width: 500px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #d32f2f; color: #ffffff; font-weight: 700; font-size: 14px;
+      padding: 14px 30px; border-radius: 50px; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(211,47,47,0.4); }
+    .btn-outline-w {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: white; font-weight: 600; font-size: 14px;
+      padding: 14px 28px; border-radius: 50px;
+      border: 1.5px solid rgba(255,255,255,0.45); text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline-w:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+    /* ── STATS ── */
+    .stats-section { background: white; padding: 72px 60px; text-align: center; }
+    .stats-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; color: var(--navy); margin-bottom: 50px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 900px; margin: 0 auto; }
+    .stat-item .number { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; color: var(--navy); line-height: 1; }
+    .stat-item .number span { color: var(--red); }
+    .stat-item .label { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+    /* ── ABOUT STRIP ── */
+    .about-section { padding: 80px 60px; background: var(--bg); position: relative; overflow: hidden; }
+    .about-section::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Ccircle cx='350' cy='350' r='330' fill='none' stroke='%23c5cae9' stroke-width='1.2' opacity='0.6'/%3E%3Ccircle cx='350' cy='350' r='270' fill='none' stroke='%23c5cae9' stroke-width='1.2' opacity='0.6'/%3E%3Ccircle cx='350' cy='350' r='210' fill='none' stroke='%23c5cae9' stroke-width='1.2' opacity='0.6'/%3E%3Ccircle cx='350' cy='350' r='150' fill='none' stroke='%23c5cae9' stroke-width='1.2' opacity='0.6'/%3E%3C/svg%3E");
+      background-size: 800px; background-position: right -100px center; background-repeat: no-repeat;
+    }
+    .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 420px 1fr; gap: 70px; align-items: center; position: relative; }
+    .about-img-wrap { position: relative; }
+    .about-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 20px; display: block; }
+    .about-img-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--red); color: white; border-radius: 16px;
+      padding: 18px 22px; text-align: center; box-shadow: 0 8px 28px rgba(211,47,47,0.35);
+    }
+    .about-img-badge .big { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 800; display: block; }
+    .about-img-badge .small { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; opacity: 0.9; }
+    .about-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 2.5vw, 2.6rem); font-weight: 800; color: var(--navy); margin-bottom: 20px; }
+    .about-text p { font-size: 15px; line-height: 1.85; color: var(--text); margin-bottom: 16px; }
+    .about-text p.lead { color: var(--navy); font-weight: 500; }
+    .btn-navy {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--navy); color: white; font-weight: 700; font-size: 14px;
+      padding: 14px 28px; border-radius: 50px; text-decoration: none; margin-top: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-navy:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26,35,126,0.35); }
+
+    /* ── WHAT WE DO ── */
+    .wwd-section { padding: 80px 60px; background: white; }
+    .wwd-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; color: var(--navy); text-align: center; margin-bottom: 50px; }
+    .wwd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+    .wwd-card { background: var(--bg); border-radius: 18px; padding: 32px 28px; border: 1px solid #eef0fb; transition: transform 0.25s, box-shadow 0.25s; }
+    .wwd-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,35,126,0.1); }
+    .wwd-card.featured { background: var(--navy); color: white; border-color: var(--navy); }
+    .wwd-card .icon { width: 52px; height: 52px; border-radius: 14px; background: rgba(26,35,126,0.1); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; }
+    .wwd-card.featured .icon { background: rgba(255,255,255,0.15); }
+    .wwd-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
+    .wwd-card.featured h3 { color: white; }
+    .wwd-card p { font-size: 13.5px; line-height: 1.7; color: var(--muted); }
+    .wwd-card.featured p { color: rgba(255,255,255,0.8); }
+
+    /* ── WHO IS IT FOR ── */
+    .who-section { padding: 80px 60px; background: var(--navy2); position: relative; overflow: hidden; }
+    .who-section::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Ccircle cx='350' cy='350' r='330' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1.5'/%3E%3Ccircle cx='350' cy='350' r='260' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1.5'/%3E%3Ccircle cx='350' cy='350' r='190' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-size: 700px; background-position: left -150px center; background-repeat: no-repeat;
+    }
+    .who-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; }
+    .who-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 2.5vw, 2.4rem); font-weight: 800; color: white; margin-bottom: 16px; }
+    .who-text p { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.7); margin-bottom: 28px; }
+    .who-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .who-list li { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.85); }
+    .who-list li::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #d32f2f; flex-shrink: 0; }
+    .who-cta { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 40px 36px; }
+    .who-cta h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; color: white; margin-bottom: 12px; }
+    .who-cta p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 24px; }
+
+    /* ── LATEST NEWS ── */
+    .news-section { padding: 80px 60px; background: white; }
+    .news-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; color: var(--navy); text-align: center; margin-bottom: 50px; }
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1100px; margin: 0 auto; }
+    .news-card { border-radius: 16px; overflow: hidden; background: var(--bg); box-shadow: 0 2px 16px rgba(0,0,0,0.06); transition: transform 0.25s, box-shadow 0.25s; text-decoration: none; color: inherit; display: block; border: 1px solid #eef0fb; }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(26,35,126,0.12); }
+    .news-thumb { width: 100%; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; font-size: 44px; }
+    .news-body { padding: 20px 22px 26px; }
+    .news-tag { display: inline-block; background: rgba(26,35,126,0.08); color: var(--navy); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .news-body h3 { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.45; margin-bottom: 8px; }
+    .news-meta { font-size: 11.5px; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy2); color: rgba(255,255,255,0.75); padding: 64px 60px 32px; }
+    .footer-top { display: grid; grid-template-columns: 280px 1fr 1fr 1fr; gap: 50px; margin-bottom: 50px; }
+    .footer-brand .foot-logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 800; color: white; }
+    .footer-brand .foot-logo span { color: #d32f2f; }
+    .footer-brand p { font-size: 13.5px; line-height: 1.75; margin-top: 12px; color: rgba(255,255,255,0.55); }
+    .footer-col h4 { font-size: 12px; font-weight: 700; color: white; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 18px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 13.5px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #d32f2f; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 26px; display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: rgba(255,255,255,0.35); }
+
+    @media (max-width: 960px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 0 24px; }
+      .stats-section, .about-section, .wwd-section, .who-section, .news-section { padding: 50px 24px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-badge { bottom: 10px; right: 10px; }
+      .wwd-grid { grid-template-columns: 1fr 1fr; }
+      .who-inner { grid-template-columns: 1fr; gap: 36px; }
+      .who-list { grid-template-columns: 1fr; }
+      .news-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 50px 24px 24px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+    }
+    @media (max-width: 580px) {
+      .wwd-grid, .news-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="d8daab0c-c54e-4f20-b03f-107912b78be7.jpeg" alt="CLIFF Logo" class="logo-img" onerror="this.style.display='none'" />
+    <div class="logo-text">
+      <span class="cliff">CLIFF</span>
+      <span class="sub">Creative Law &amp; IP Finance Forum</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">HOME</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+    <li><a href="events.html">EVENTS</a></li>
+    <li><a href="resources.html">RESOURCES</a></li>
+    <li><a href="blog.html">BLOG / NEWS</a></li>
+    <li><a href="contact.html">CONTACT</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="active">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="events.html">EVENTS</a>
+  <a href="resources.html">RESOURCES</a>
+  <a href="blog.html">BLOG / NEWS</a>
+  <a href="contact.html">CONTACT</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-rings"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⚖️ IP Awareness Community</div>
+    <h1>Where <span>Creativity</span> Becomes Bankable.</h1>
+    <p>CLIFF is Nigeria's premier platform educating creatives, innovators, and professionals on how to understand, protect, and monetise their Intellectual Property as a financial asset.</p>
+    <div class="hero-btns">
+      <a href="about.html" class="btn-gold">Join The Community ↗</a>
+      <a href="resources.html" class="btn-outline-w">Explore Resources</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <h2>Our Community At A Glance</h2>
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="number">500<span>+</span></div>
+      <div class="label">Community Members</div>
+    </div>
+    <div class="stat-item">
+      <div class="number">4</div>
+      <div class="label">Focus Areas</div>
+    </div>
+    <div class="stat-item">
+      <div class="number">20<span>+</span></div>
+      <div class="label">IP Resources Published</div>
+    </div>
+    <div class="stat-item">
+      <div class="number">10<span>+</span></div>
+      <div class="label">Events &amp; Sessions Held</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="about-inner">
+    <div class="about-img-wrap">
+      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&q=80" alt="About CLIFF" class="about-img" />
+      <div class="about-img-badge">
+        <span class="big">IP</span>
+        <span class="small">Made Bankable</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <h2>About CLIFF</h2>
+      <p class="lead">The official Intellectual Property awareness community of the Creative Law and Intellectual Property Finance Forum.</p>
+      <p>CLIFF was created to educate, empower, and connect creatives, innovators, and professionals on how to understand and protect their Intellectual Property — and more importantly, how to monetise it as a financial asset.</p>
+      <p>We are committed to building a system where creativity is not just appreciated — but bankable. From musicians to lawyers, filmmakers to investors, CLIFF bridges the gap between creative work and financial opportunity.</p>
+      <a href="about.html" class="btn-navy">Learn More About CLIFF ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="wwd-section">
+  <h2>What To Expect From CLIFF</h2>
+  <div class="wwd-grid">
+    <div class="wwd-card">
+      <div class="icon">📚</div>
+      <h3>IP Education &amp; Updates</h3>
+      <p>Regular, accessible content breaking down intellectual property law, rights, and frameworks in ways creatives can actually use.</p>
+    </div>
+    <div class="wwd-card">
+      <div class="icon">⚖️</div>
+      <h3>Real-Life Case Discussions</h3>
+      <p>Deep dives into real IP cases — local and international — to help you understand how the law works in practice.</p>
+    </div>
+    <div class="wwd-card featured">
+      <div class="icon">💰</div>
+      <h3>Funding &amp; Deal Opportunities</h3>
+      <p>Structured opportunities for creatives to unlock funding using their intellectual property as collateral and leverage.</p>
+    </div>
+    <div class="wwd-card">
+      <div class="icon">🏛️</div>
+      <h3>Legal &amp; Business Structures</h3>
+      <p>Guidance on how to set up the right legal and business structures around your creative work to protect and grow it.</p>
+    </div>
+    <div class="wwd-card">
+      <div class="icon">🤝</div>
+      <h3>CLIFF Initiatives &amp; Collabs</h3>
+      <p>Collaborations with IP professionals, financiers, and creative institutions to bring tangible value to our community.</p>
+    </div>
+    <div class="wwd-card">
+      <div class="icon">🏦</div>
+      <h3>IP as a Financial Asset</h3>
+      <p>Dedicated programming on how to access funding opportunities using IP — because creativity should be bankable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS IT FOR -->
+<section class="who-section">
+  <div class="who-inner">
+    <div class="who-text">
+      <h2>Who This Platform Is For</h2>
+      <p>CLIFF brings together a diverse community united by one goal: making intellectual property work for the people who create it.</p>
+      <ul class="who-list">
+        <li>Musicians &amp; Recording Artists</li>
+        <li>Filmmakers &amp; Producers</li>
+        <li>Writers &amp; Authors</li>
+        <li>Content Creators</li>
+        <li>Lawyers &amp; Law Students</li>
+        <li>Distributors &amp; Investors</li>
+        <li>Innovators &amp; Entrepreneurs</li>
+        <li>Anyone Interested in IP</li>
+      </ul>
+    </div>
+    <div class="who-cta">
+      <h3>Ready to make your creativity bankable?</h3>
+      <p>Join the CLIFF community today and gain access to IP education, deal opportunities, expert discussions, and structured funding pathways.</p>
+      <a href="contact.html" class="btn-gold">Join CLIFF Now ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST NEWS -->
+<section class="news-section">
+  <h2>Latest From CLIFF</h2>
+  <div class="news-grid">
+    <a href="blog.html" class="news-card">
+      <div class="news-thumb" style="background:linear-gradient(135deg,#eef0fb,#c7cdf0);">⚖️</div>
+      <div class="news-body">
+        <span class="news-tag">IP Education</span>
+        <h3>Understanding Copyright Protection For Nigerian Creatives</h3>
+        <div class="news-meta">CLIFF Team · IP Education</div>
+      </div>
+    </a>
+    <a href="blog.html" class="news-card">
+      <div class="news-thumb" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0);">💰</div>
+      <div class="news-body">
+        <span class="news-tag">Funding</span>
+        <h3>How Filmmakers Can Use IP Rights To Access Finance</h3>
+        <div class="news-meta">CLIFF Team · Finance</div>
+      </div>
+    </a>
+    <a href="blog.html" class="news-card">
+      <div class="news-thumb" style="background:linear-gradient(135deg,#eef0fb,#c7cdf0);">🏛️</div>
+      <div class="news-body">
+        <span class="news-tag">Legal</span>
+        <h3>Trademark Registration: A Step-By-Step Guide For Creatives</h3>
+        <div class="news-meta">CLIFF Team · Legal</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="foot-logo"><span>CLIFF</span></div>
+      <p>Creative Law and Intellectual Property Finance Forum — Making creativity bankable across Nigeria and Africa.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="blog.html">Blog / News</a></li>
+        <li><a href="blog.html">Case Studies</a></li>
+        <li><a href="resources.html">IP Guides</a></li>
+        <li><a href="resources.html">Funding Pathways</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html">Join Community</a></li>
+        <li><a href="#">Partner With Us</a></li>
+        <li><a href="#">Speak at CLIFF</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 CLIFF — Creative Law and Intellectual Property Finance Forum. All Rights Reserved.</span>
+    <span>Making Creativity Bankable.</span>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+</script>
+</body>
+</html>

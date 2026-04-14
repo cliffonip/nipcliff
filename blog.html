@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog / News - CLIFF | Creative Law and Intellectual Property Finance Forum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#1a237e;--navy2:#0d1554;--red:#d32f2f;--gold:#d32f2f;--light:#eef0fb;--text:#1c1c2e;--muted:#5c6080;--white:#ffffff;--bg:#f7f8ff; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); overflow-x: hidden; }
+    nav { position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,0.07);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between; }
+    .nav-logo { display:flex;align-items:center;gap:10px;text-decoration:none; }
+    .logo-img { width:52px;height:52px;object-fit:contain; }
+    .logo-text { display:flex;flex-direction:column;line-height:1.2; }
+    .logo-text .cliff { font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--navy); }
+    .logo-text .sub { font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;max-width:160px; }
+    .nav-links { display:flex;align-items:center;gap:26px;list-style:none; }
+    .nav-links a { font-size:13px;font-weight:500;color:var(--text);text-decoration:none;transition:color 0.2s; }
+    .nav-links a.active { color:var(--navy);border-bottom:2px solid var(--red);padding-bottom:2px; }
+    .nav-links a:hover { color:var(--navy); }
+    .hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px; }
+    .hamburger span { display:block;width:24px;height:2px;background:var(--navy);border-radius:2px; }
+    .mobile-menu { display:none;position:fixed;top:72px;left:0;right:0;background:white;z-index:999;padding:20px 0;box-shadow:0 4px 20px rgba(0,0,0,0.1); }
+    .mobile-menu.open { display:block; }
+    .mobile-menu a { display:block;padding:14px 30px;font-size:15px;font-weight:500;color:var(--text);text-decoration:none;border-bottom:1px solid #f0f0f0; }
+    .mobile-menu a.active { color:var(--navy); }
+    .page-hero { margin-top:72px;background:var(--navy2);padding:90px 60px 70px;text-align:center;position:relative;overflow:hidden; }
+    .page-hero::after { content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Ccircle cx='300' cy='200' r='280' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1.5'/%3E%3Ccircle cx='300' cy='200' r='220' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1.5'/%3E%3C/svg%3E") center/cover no-repeat;pointer-events:none; }
+    .page-hero h1 { font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:800;color:white;position:relative;z-index:1; }
+    .page-hero p { font-size:15px;color:rgba(255,255,255,0.6);margin-top:14px;position:relative;z-index:1; }
+    .breadcrumb { font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:16px;position:relative;z-index:1; }
+    .breadcrumb a { color:#d32f2f;text-decoration:none; }
+
+    .blog-section { padding:80px 60px; }
+    .blog-inner { max-width:1100px;margin:0 auto; }
+    .filter-bar { display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px; }
+    .filter-btn { padding:9px 22px;border-radius:50px;border:1.5px solid #d0d4ee;background:white;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif; }
+    .filter-btn.active,.filter-btn:hover { background:var(--navy);color:white;border-color:var(--navy); }
+
+    .featured-post { background:var(--navy2);border-radius:22px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;margin-bottom:50px; }
+    .featured-post-img { display:flex;align-items:center;justify-content:center;font-size:80px;background:linear-gradient(135deg,#1a237e,#0d1554);min-height:280px; }
+    .featured-post-body { padding:44px 40px;display:flex;flex-direction:column;justify-content:center; }
+    .featured-badge { display:inline-block;background:#d32f2f;color:#ffffff;font-size:11px;font-weight:700;padding:5px 14px;border-radius:50px;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px; }
+    .featured-post-body h2 { font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:800;color:white;margin-bottom:14px;line-height:1.3; }
+    .featured-post-body p { font-size:14px;line-height:1.75;color:rgba(255,255,255,0.65);margin-bottom:22px; }
+    .read-link { display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:#d32f2f;text-decoration:none; }
+    .read-link:hover { text-decoration:underline; }
+
+    .blog-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:26px; }
+    .blog-card { background:white;border-radius:16px;overflow:hidden;border:1px solid #eef0fb;box-shadow:0 2px 14px rgba(0,0,0,0.04);transition:transform 0.25s,box-shadow 0.25s;text-decoration:none;color:inherit;display:block; }
+    .blog-card:hover { transform:translateY(-4px);box-shadow:0 12px 28px rgba(26,35,126,0.1); }
+    .blog-thumb { width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;font-size:44px; }
+    .blog-body { padding:22px 24px 26px; }
+    .blog-tag { display:inline-block;background:rgba(26,35,126,0.08);color:var(--navy);font-size:11px;font-weight:700;padding:4px 12px;border-radius:50px;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px; }
+    .blog-body h3 { font-size:15px;font-weight:700;color:var(--text);line-height:1.45;margin-bottom:10px; }
+    .blog-body p { font-size:13.5px;line-height:1.7;color:var(--muted); }
+    .blog-meta { display:flex;align-items:center;gap:12px;font-size:11.5px;color:var(--muted);margin-top:14px; }
+    .blog-meta .dot { color:var(--red); }
+
+    footer { background:var(--navy2);color:rgba(255,255,255,0.75);padding:64px 60px 32px; }
+    .footer-top { display:grid;grid-template-columns:280px 1fr 1fr 1fr;gap:50px;margin-bottom:50px; }
+    .footer-brand .foot-logo { font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:white; }
+    .footer-brand .foot-logo span { color:#d32f2f; }
+    .footer-brand p { font-size:13.5px;line-height:1.75;margin-top:12px;color:rgba(255,255,255,0.55); }
+    .footer-col h4 { font-size:12px;font-weight:700;color:white;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:18px; }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { margin-bottom:10px; }
+    .footer-col ul li a { font-size:13.5px;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s; }
+    .footer-col ul li a:hover { color:#d32f2f; }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,0.1);padding-top:26px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:rgba(255,255,255,0.35); }
+
+    @media (max-width:960px) {
+      nav { padding:0 20px; } .nav-links { display:none; } .hamburger { display:flex; }
+      .page-hero { padding:70px 24px 50px; }
+      .blog-section { padding:50px 24px; }
+      .featured-post { grid-template-columns:1fr; }
+      .blog-grid { grid-template-columns:1fr 1fr; }
+      footer { padding:50px 24px 24px; }
+      .footer-top { grid-template-columns:1fr 1fr;gap:36px; }
+      .footer-bottom { flex-direction:column;gap:10px;text-align:center; }
+    }
+    @media (max-width:580px) { .blog-grid { grid-template-columns:1fr; } .footer-top { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="d8daab0c-c54e-4f20-b03f-107912b78be7.jpeg" alt="CLIFF Logo" class="logo-img" onerror="this.style.display='none'" />
+    <div class="logo-text"><span class="cliff">CLIFF</span><span class="sub">Creative Law &amp; IP Finance Forum</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">HOME</a></li><li><a href="about.html">ABOUT</a></li><li><a href="events.html">EVENTS</a></li><li><a href="resources.html">RESOURCES</a></li><li><a href="blog.html" class="active">BLOG / NEWS</a></li><li><a href="contact.html">CONTACT</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="events.html">EVENTS</a><a href="resources.html">RESOURCES</a><a href="blog.html" class="active">BLOG / NEWS</a><a href="contact.html">CONTACT</a>
+</div>
+
+<section class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a> / Blog &amp; News</div>
+  <h1>Blog &amp; News</h1>
+  <p>IP education, case discussions, community updates, and deal insights from CLIFF.</p>
+</section>
+
+<section class="blog-section">
+  <div class="blog-inner">
+    <div class="filter-bar">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">IP Education</button>
+      <button class="filter-btn">Case Studies</button>
+      <button class="filter-btn">Funding</button>
+      <button class="filter-btn">Legal</button>
+      <button class="filter-btn">Community</button>
+    </div>
+
+    <div class="featured-post">
+      <div class="featured-post-img">⚖️</div>
+      <div class="featured-post-body">
+        <span class="featured-badge">Featured Post</span>
+        <h2>Why Every Nigerian Creative Needs to Understand Their IP Rights in 2026</h2>
+        <p>From music to film to writing — intellectual property is your most valuable asset. Here's what you need to know to protect and profit from it.</p>
+        <a href="#" class="read-link">Read Full Article ↗</a>
+      </div>
+    </div>
+
+    <div class="blog-grid">
+      <a href="#" class="blog-card">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#eef0fb,#c7cdf0);">⚖️</div>
+        <div class="blog-body">
+          <span class="blog-tag">IP Education</span>
+          <h3>Understanding Copyright Protection For Nigerian Creatives</h3>
+          <p>A beginner's guide to what copyright covers, how long it lasts, and how to enforce it.</p>
+          <div class="blog-meta"><span>CLIFF Team</span><span class="dot">●</span><span>IP Education</span></div>
+        </div>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0);">💰</div>
+        <div class="blog-body">
+          <span class="blog-tag">Funding</span>
+          <h3>How Filmmakers Can Use IP Rights To Access Finance</h3>
+          <p>Using distribution rights, co-production deals, and IP licensing as funding pathways for Nigerian filmmakers.</p>
+          <div class="blog-meta"><span>CLIFF Team</span><span class="dot">●</span><span>Funding</span></div>
+        </div>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#eef0fb,#c7cdf0);">🏛️</div>
+        <div class="blog-body">
+          <span class="blog-tag">Legal</span>
+          <h3>Trademark Registration: A Step-By-Step Guide For Creatives</h3>
+          <p>How to register your brand, logo, and creative identity through the Nigerian Trademarks Registry.</p>
+          <div class="blog-meta"><span>CLIFF Team</span><span class="dot">●</span><span>Legal</span></div>
+        </div>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#eef0fb,#c7cdf0);">🎵</div>
+        <div class="blog-body">
+          <span class="blog-tag">Case Study</span>
+          <h3>Case Study: How a Nigerian Musician Monetised Their Back Catalogue</h3>
+          <p>A real-world walk-through of how one artist turned 10 years of music into a structured financial asset.</p>
+          <div class="blog-meta"><span>CLIFF Team</span><span class="dot">●</span><span>Case Study</span></div>
+        </div>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0);">🌍</div>
+        <div class="blog-body">
+          <span class="blog-tag">IP Education</span>
+          <h3>The WIPO and What It Means For African Creatives</h3>
+          <p>How international IP frameworks apply to Nigerian artists, writers, and innovators operating globally.</p>
+          <div class="blog-meta"><span>CLIFF Team</span><span class="dot">●</span><span>IP Education</span></div>
+        </div>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,#eef0fb,#c7cdf0);">🤝</div>
+        <div class="blog-body">
+          <span class="blog-tag">Community</span>
+          <h3>Welcome to CLIFF: Our Story and What We're Building</h3>
+          <p>The founding story of CLIFF, our mission, and the community we're building to make creativity bankable.</p>
+          <div class="blog-meta"><span>CLIFF Team</span><span class="dot">●</span><span>Community</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><div class="foot-logo"><span>CLIFF</span></div><p>Creative Law and Intellectual Property Finance Forum — Making creativity bankable across Nigeria and Africa.</p></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="events.html">Events</a></li><li><a href="resources.html">Resources</a></li></ul></div>
+    <div class="footer-col"><h4>Explore</h4><ul><li><a href="blog.html">Blog / News</a></li><li><a href="blog.html">Case Studies</a></li><li><a href="resources.html">IP Guides</a></li><li><a href="resources.html">Funding Pathways</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="contact.html">Join Community</a></li><li><a href="#">Partner With Us</a></li><li><a href="#">Speak at CLIFF</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 CLIFF — Creative Law and Intellectual Property Finance Forum. All Rights Reserved.</span><span>Making Creativity Bankable.</span></div>
+</footer>
+<script>
+  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+  document.querySelectorAll('.filter-btn').forEach(btn=>{btn.addEventListener('click',function(){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');});});
+</script>
+</body>
+</html>
