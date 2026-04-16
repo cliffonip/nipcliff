@@ -9,9 +9,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --navy:#1a237e;--navy2:#0d1554;--red:#d32f2f;--gold:#d32f2f;--light:#eef0fb;--text:#1c1c2e;--muted:#5c6080;--white:#ffffff;--bg:#f7f8ff; }
+    :root {
+      --navy:  #1a237e;
+      --navy2: #0d1554;
+      --red:   #d32f2f;
+      --text:  #1c1c2e;
+      --muted: #5c6080;
+      --white: #ffffff;
+      --bg:    #f7f8ff;
+      --light: #eef0fb;
+    }
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); overflow-x: hidden; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+    /* NAV */
     nav { position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,0.07);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between; }
     .nav-logo { display:flex;align-items:center;gap:10px;text-decoration:none; }
     .logo-img { width:52px;height:52px;object-fit:contain; }
@@ -28,57 +39,85 @@
     .mobile-menu.open { display:block; }
     .mobile-menu a { display:block;padding:14px 30px;font-size:15px;font-weight:500;color:var(--text);text-decoration:none;border-bottom:1px solid #f0f0f0; }
     .mobile-menu a.active { color:var(--navy); }
+
+    /* PAGE HERO */
     .page-hero { margin-top:72px;background:var(--navy2);padding:90px 60px 70px;text-align:center;position:relative;overflow:hidden; }
     .page-hero::after { content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Ccircle cx='300' cy='200' r='280' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1.5'/%3E%3Ccircle cx='300' cy='200' r='220' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1.5'/%3E%3C/svg%3E") center/cover no-repeat;pointer-events:none; }
-    .page-hero h1 { font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:800;color:white;position:relative;z-index:1; }
-    .page-hero p { font-size:15px;color:rgba(255,255,255,0.6);margin-top:14px;position:relative;z-index:1; }
+    .page-hero h1 { font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:800;color:var(--white);position:relative;z-index:1; }
+    .page-hero p { font-size:15px;color:rgba(255,255,255,0.65);margin-top:14px;position:relative;z-index:1; }
     .breadcrumb { font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:16px;position:relative;z-index:1; }
-    .breadcrumb a { color:#d32f2f;text-decoration:none; }
+    .breadcrumb a { color:var(--red);text-decoration:none; }
 
-    .contact-section { padding:80px 60px; }
-    .contact-inner { max-width:1000px;margin:0 auto;display:grid;grid-template-columns:320px 1fr;gap:60px; }
+    /* CONTACT SECTION */
+    .contact-section { padding:80px 60px;background:var(--white); }
+    .contact-inner { max-width:1040px;margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:60px; }
 
-    .contact-info h2 { font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;color:var(--navy);margin-bottom:16px; }
-    .contact-info > p { font-size:14.5px;line-height:1.8;color:var(--muted);margin-bottom:34px; }
-    .info-item { display:flex;gap:16px;align-items:flex-start;margin-bottom:24px; }
-    .info-icon { width:46px;height:46px;border-radius:12px;background:rgba(26,35,126,0.1);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0; }
-    .info-item h4 { font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px; }
-    .info-item p { font-size:14px;color:var(--muted);margin:0; }
+    /* LEFT PANEL */
+    .contact-info { background:var(--light);border-radius:20px;padding:40px 36px; }
+    .contact-info h2 { font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:800;color:var(--navy);margin-bottom:10px; }
+    .contact-info > p { font-size:14px;line-height:1.8;color:var(--muted);margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid #d0d4ee; }
 
-    .join-box { background:var(--navy2);border-radius:18px;padding:28px 26px;margin-top:30px; }
-    .join-box h4 { font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:white;margin-bottom:10px; }
-    .join-box p { font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:18px; }
-    .btn-gold { display:inline-flex;align-items:center;gap:8px;background:#d32f2f;color:#ffffff;font-weight:700;font-size:13.5px;padding:12px 24px;border-radius:50px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s; }
-    .btn-gold:hover { transform:translateY(-2px);box-shadow:0 8px 20px rgba(211,47,47,0.35); }
+    .info-item { display:flex;gap:14px;align-items:flex-start;margin-bottom:22px; }
+    .info-icon { width:44px;height:44px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .info-icon svg { width:20px;height:20px;fill:white; }
+    .info-item h4 { font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px; }
+    .info-item p { font-size:13.5px;color:var(--text);line-height:1.6;margin:0; }
+    .info-item a { font-size:13.5px;color:var(--text);text-decoration:none;transition:color 0.2s; }
+    .info-item a:hover { color:var(--red); }
 
-    .contact-form { background:white;border-radius:20px;padding:44px 40px;box-shadow:0 4px 30px rgba(0,0,0,0.07);border:1px solid #eef0fb; }
+    /* SOCIAL */
+    .social-section { margin-top:24px;padding-top:24px;border-top:1px solid #d0d4ee; }
+    .social-section h4 { font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:14px; }
+    .social-links { display:flex;flex-direction:column;gap:10px; }
+    .social-link { display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--white);border:1.5px solid #d0d4ee;text-decoration:none;color:var(--text);font-size:13.5px;font-weight:500;transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s; }
+    .social-link:hover { border-color:var(--navy);box-shadow:0 4px 14px rgba(26,35,126,0.1);transform:translateX(3px); }
+    .s-icon { width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .s-icon svg { width:17px;height:17px; }
+    .social-link span.label { flex:1; }
+    .social-link .arrow { font-size:11px;color:var(--muted); }
+    .s-wa { background:#25d366; }
+    .s-ig { background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%); }
+    .s-fb { background:#1877f2; }
+    .s-yt { background:#ff0000; }
+    .s-tt { background:#010101; }
+
+    /* JOIN BOX */
+    .join-box { background:var(--navy2);border-radius:16px;padding:26px 24px;margin-top:24px; }
+    .join-box h4 { font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:8px; }
+    .join-box p { font-size:13px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:18px; }
+    .btn-red { display:inline-flex;align-items:center;gap:8px;background:var(--red);color:var(--white);font-weight:700;font-size:13.5px;padding:12px 24px;border-radius:50px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s; }
+    .btn-red:hover { transform:translateY(-2px);box-shadow:0 8px 20px rgba(211,47,47,0.4); }
+
+    /* FORM */
+    .contact-form { background:var(--white);border-radius:20px;padding:44px 40px;box-shadow:0 4px 30px rgba(26,35,126,0.08);border:1.5px solid #d0d4ee; }
     .contact-form h2 { font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:28px; }
-    .form-row { display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:0; }
+    .form-row { display:grid;grid-template-columns:1fr 1fr;gap:18px; }
     .form-group { display:flex;flex-direction:column;margin-bottom:18px; }
-    .form-group label { font-size:12px;font-weight:700;color:var(--text);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px; }
-    .form-group input,.form-group textarea,.form-group select { border:1.5px solid #d0d4ee;border-radius:10px;padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);transition:border-color 0.2s;outline:none;background:var(--bg); }
-    .form-group input:focus,.form-group textarea:focus,.form-group select:focus { border-color:var(--navy); }
+    .form-group label { font-size:11.5px;font-weight:700;color:var(--navy);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px; }
+    .form-group input, .form-group textarea, .form-group select { border:1.5px solid #d0d4ee;border-radius:10px;padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--bg);outline:none;transition:border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--navy); }
     .form-group textarea { resize:vertical;min-height:120px; }
-    .btn-submit { display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:white;font-weight:700;font-size:14px;padding:15px 34px;border-radius:50px;border:none;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;font-family:'DM Sans',sans-serif; }
+    .btn-submit { display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:var(--white);font-weight:700;font-size:14px;padding:15px 36px;border-radius:50px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform 0.2s,box-shadow 0.2s; }
     .btn-submit:hover { transform:translateY(-2px);box-shadow:0 8px 20px rgba(26,35,126,0.35); }
 
+    /* FOOTER */
     footer { background:var(--navy2);color:rgba(255,255,255,0.75);padding:64px 60px 32px; }
     .footer-top { display:grid;grid-template-columns:280px 1fr 1fr 1fr;gap:50px;margin-bottom:50px; }
-    .footer-brand .foot-logo { font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:white; }
-    .footer-brand .foot-logo span { color:#d32f2f; }
+    .footer-brand .foot-logo { font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--white); }
+    .footer-brand .foot-logo span { color:var(--red); }
     .footer-brand p { font-size:13.5px;line-height:1.75;margin-top:12px;color:rgba(255,255,255,0.55); }
-    .footer-col h4 { font-size:12px;font-weight:700;color:white;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:18px; }
+    .footer-col h4 { font-size:12px;font-weight:700;color:var(--white);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:18px; }
     .footer-col ul { list-style:none; }
     .footer-col ul li { margin-bottom:10px; }
     .footer-col ul li a { font-size:13.5px;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s; }
-    .footer-col ul li a:hover { color:#d32f2f; }
+    .footer-col ul li a:hover { color:var(--red); }
     .footer-bottom { border-top:1px solid rgba(255,255,255,0.1);padding-top:26px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:rgba(255,255,255,0.35); }
 
     @media (max-width:960px) {
       nav { padding:0 20px; } .nav-links { display:none; } .hamburger { display:flex; }
       .page-hero { padding:70px 24px 50px; }
       .contact-section { padding:50px 24px; }
-      .contact-inner { grid-template-columns:1fr;gap:40px; }
+      .contact-inner { grid-template-columns:1fr;gap:36px; }
       .contact-form { padding:30px 24px; }
       .form-row { grid-template-columns:1fr; }
       footer { padding:50px 24px 24px; }
@@ -89,18 +128,32 @@
   </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="nav-logo">
-    <img src="d8daab0c-c54e-4f20-b03f-107912b78be7.jpeg" alt="CLIFF Logo" class="logo-img" onerror="this.style.display='none'" />
-    <div class="logo-text"><span class="cliff">CLIFF</span><span class="sub">Creative Law &amp; IP Finance Forum</span></div>
+    <img src="cliff-logo.jpeg" alt="CLIFF Logo" class="logo-img" onerror="this.style.display='none'" />
+    <div class="logo-text">
+      <span class="cliff">CLIFF</span>
+      <span class="sub">Creative Law &amp; IP Finance Forum</span>
+    </div>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html">HOME</a></li><li><a href="about.html">ABOUT</a></li><li><a href="events.html">EVENTS</a></li><li><a href="resources.html">RESOURCES</a></li><li><a href="blog.html">BLOG / NEWS</a></li><li><a href="contact.html" class="active">CONTACT</a></li>
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+    <li><a href="events.html">EVENTS</a></li>
+    <li><a href="resources.html">RESOURCES</a></li>
+    <li><a href="blog.html">BLOG / NEWS</a></li>
+    <li><a href="contact.html" class="active">CONTACT</a></li>
   </ul>
   <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="events.html">EVENTS</a><a href="resources.html">RESOURCES</a><a href="blog.html">BLOG / NEWS</a><a href="contact.html" class="active">CONTACT</a>
+  <a href="index.html">HOME</a>
+  <a href="about.html">ABOUT</a>
+  <a href="events.html">EVENTS</a>
+  <a href="resources.html">RESOURCES</a>
+  <a href="blog.html">BLOG / NEWS</a>
+  <a href="contact.html" class="active">CONTACT</a>
 </div>
 
 <section class="page-hero">
@@ -111,28 +164,97 @@
 
 <section class="contact-section">
   <div class="contact-inner">
+
+    <!-- LEFT -->
     <div class="contact-info">
       <h2>Connect With CLIFF</h2>
       <p>Whether you want to join the community, partner with us, speak at an event, contribute a resource, or explore a deal opportunity — we'd love to hear from you.</p>
+
       <div class="info-item">
-        <div class="info-icon">📧</div>
-        <div><h4>Email</h4><p id="cliff-email"></p></div>
+        <div class="info-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+        </div>
+        <div>
+          <h4>Address</h4>
+          <p>No. 1 Umunya Street, Federal Housing Estate, 3-3, Onitsha, Anambra State, Nigeria.</p>
+        </div>
       </div>
+
       <div class="info-item">
-        <div class="info-icon">📍</div>
-        <div><h4>Location</h4><p>Nigeria</p></div>
+        <div class="info-icon">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </div>
+        <div>
+          <h4>Phone</h4>
+          <a href="tel:+2347070541177">07070541177</a>
+        </div>
       </div>
+
       <div class="info-item">
-        <div class="info-icon">💬</div>
-        <div><h4>Community</h4><p>Join our active WhatsApp &amp; Telegram groups</p></div>
+        <div class="info-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <div>
+          <h4>Email</h4>
+          <a id="cliff-email" href="#">info@cliff.ng</a>
+        </div>
       </div>
+
+      <div class="social-section">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+
+          <a href="https://chat.whatsapp.com/Bq2E5O3wqAF4ci5FeRV3CF?mode=gi_t" target="_blank" rel="noopener" class="social-link">
+            <div class="s-icon s-wa">
+              <svg fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <span class="label">WhatsApp Community</span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a href="https://www.instagram.com/cliffonip?igsh=MWM2cTF5eGY3Zmtveg==" target="_blank" rel="noopener" class="social-link">
+            <div class="s-icon s-ig">
+              <svg fill="white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </div>
+            <span class="label">Instagram — @cliffonip</span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a href="https://www.facebook.com/share/18WTGAcrTH/" target="_blank" rel="noopener" class="social-link">
+            <div class="s-icon s-fb">
+              <svg fill="white" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <span class="label">Facebook — CLIFF</span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a href="https://www.youtube.com/@cliffonip" target="_blank" rel="noopener" class="social-link">
+            <div class="s-icon s-yt">
+              <svg fill="white" viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            </div>
+            <span class="label">YouTube — @cliffonip</span>
+            <span class="arrow">↗</span>
+          </a>
+
+          <a href="https://tiktok.com/@cliffonip" target="_blank" rel="noopener" class="social-link">
+            <div class="s-icon s-tt">
+              <svg fill="white" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+            </div>
+            <span class="label">TikTok — @cliffonip</span>
+            <span class="arrow">↗</span>
+          </a>
+
+        </div>
+      </div>
+
       <div class="join-box">
         <h4>Ready to join CLIFF?</h4>
         <p>Become part of the community making intellectual property work for creatives across Nigeria and Africa.</p>
-        <a href="#" class="btn-gold">Join Community ↗</a>
+        <a href="https://chat.whatsapp.com/Bq2E5O3wqAF4ci5FeRV3CF?mode=gi_t" target="_blank" rel="noopener" class="btn-red">Join Community ↗</a>
       </div>
     </div>
 
+    <!-- RIGHT: Form -->
     <div class="contact-form">
       <h2>Send Us A Message</h2>
       <div class="form-row">
@@ -140,7 +262,8 @@
         <div class="form-group"><label>Last Name</label><input type="text" placeholder="Your last name" /></div>
       </div>
       <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" /></div>
-      <div class="form-group"><label>I Am A...</label>
+      <div class="form-group">
+        <label>I Am A...</label>
         <select>
           <option>Select your role</option>
           <option>Musician / Recording Artist</option>
@@ -152,7 +275,8 @@
           <option>Other</option>
         </select>
       </div>
-      <div class="form-group"><label>Subject</label>
+      <div class="form-group">
+        <label>Subject</label>
         <select>
           <option>General Enquiry</option>
           <option>Join the Community</option>
@@ -166,23 +290,48 @@
       <div class="form-group"><label>Message</label><textarea placeholder="Tell us how you'd like to get involved or what you'd like to know..."></textarea></div>
       <button class="btn-submit">Send Message ↗</button>
     </div>
+
   </div>
 </section>
 
 <footer>
   <div class="footer-top">
-    <div class="footer-brand"><div class="foot-logo"><span>CLIFF</span></div><p>Creative Law and Intellectual Property Finance Forum — Making creativity bankable across Nigeria and Africa.</p></div>
-    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="events.html">Events</a></li><li><a href="resources.html">Resources</a></li></ul></div>
-    <div class="footer-col"><h4>Explore</h4><ul><li><a href="blog.html">Blog / News</a></li><li><a href="blog.html">Case Studies</a></li><li><a href="resources.html">IP Guides</a></li><li><a href="resources.html">Funding Pathways</a></li></ul></div>
-    <div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="contact.html">Join Community</a></li><li><a href="#">Partner With Us</a></li><li><a href="#">Speak at CLIFF</a></li></ul></div>
+    <div class="footer-brand">
+      <div class="foot-logo"><span>CLIFF</span></div>
+      <p>Creative Law and Intellectual Property Finance Forum — Making creativity bankable across Nigeria and Africa.</p>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Explore</h4><ul>
+      <li><a href="blog.html">Blog / News</a></li>
+      <li><a href="blog.html">Case Studies</a></li>
+      <li><a href="resources.html">IP Guides</a></li>
+      <li><a href="resources.html">Funding Pathways</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul>
+      <li><a href="contact.html">Contact Us</a></li>
+      <li><a href="https://chat.whatsapp.com/Bq2E5O3wqAF4ci5FeRV3CF?mode=gi_t" target="_blank" rel="noopener">WhatsApp</a></li>
+      <li><a href="https://www.instagram.com/cliffonip?igsh=MWM2cTF5eGY3Zmtveg==" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.facebook.com/share/18WTGAcrTH/" target="_blank" rel="noopener">Facebook</a></li>
+      <li><a href="https://www.youtube.com/@cliffonip" target="_blank" rel="noopener">YouTube</a></li>
+      <li><a href="https://tiktok.com/@cliffonip" target="_blank" rel="noopener">TikTok</a></li>
+    </ul></div>
   </div>
-  <div class="footer-bottom"><span>© 2026 CLIFF — Creative Law and Intellectual Property Finance Forum. All Rights Reserved.</span><span>Making Creativity Bankable.</span></div>
+  <div class="footer-bottom">
+    <span>© 2026 CLIFF — Creative Law and Intellectual Property Finance Forum. All Rights Reserved.</span>
+    <span>Making Creativity Bankable.</span>
+  </div>
 </footer>
+
 <script>
-  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
-  const u='info'; const d='cliff.ng';
-  const el=document.getElementById('cliff-email');
-  if(el){el.textContent=u+'@'+d;}
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  const u = 'info'; const d = 'cliff' + '.ng';
+  const el = document.getElementById('cliff-email');
+  if (el) { el.textContent = u + '@' + d; el.href = 'mailto:' + u + '@' + d; }
 </script>
 </body>
 </html>
