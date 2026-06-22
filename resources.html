@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light only" />
   <title>Resources - CLIFF | Creative Law and Intellectual Property Finance Forum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #ffffff !important; color-scheme: light !important; }
     :root { --navy:#2E4374;--navy2:#1a2a4a;--red:#D62F2F;--gold:#D62F2F;--light:#EBF1F7;--text:#1c1c2e;--muted:#5c6080;--white:#ffffff;--bg:#F5F8FA; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); overflow-x: hidden; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #ffffff !important; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
     nav { position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,0.07);padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between; }
     .nav-logo { display:flex;align-items:center;gap:10px;text-decoration:none; }
     .logo-img { width:52px;height:52px;object-fit:contain; }
@@ -113,65 +115,27 @@
     <div class="filter-bar">
       <button class="filter-btn active">All Resources</button>
       <button class="filter-btn">Guides</button>
-      <button class="filter-btn">Templates</button>
-      <button class="filter-btn">Videos</button>
       <button class="filter-btn">Articles</button>
-      <button class="filter-btn">Funding</button>
+      <button class="filter-btn">Guides</button>
     </div>
     <div class="resources-grid">
-      <a href="#" class="resource-card">
-        <div class="res-icon-row"><div class="res-icon">📖</div><span class="res-type guide">Guide</span></div>
-        <h3>Introduction to Intellectual Property Rights in Nigeria</h3>
-        <p>A beginner-friendly breakdown of copyright, trademark, patent, and trade secret law for Nigerian creatives.</p>
-        <div class="res-cta">Download Guide ↗</div>
-      </a>
-      <a href="#" class="resource-card">
-        <div class="res-icon-row"><div class="res-icon">📝</div><span class="res-type template">Template</span></div>
-        <h3>Music Copyright Registration Checklist</h3>
-        <p>Step-by-step checklist for musicians to register and document their copyright in Nigeria.</p>
-        <div class="res-cta">Download Template ↗</div>
-      </a>
-      <a href="#" class="resource-card">
-        <div class="res-icon-row"><div class="res-icon">🎬</div><span class="res-type video">Video</span></div>
-        <h3>How to Use Your IP as Collateral — Explained</h3>
-        <p>A video walkthrough of the process for leveraging intellectual property to access funding in Nigeria.</p>
-        <div class="res-cta">Watch Video ↗</div>
-      </a>
-      <a href="#" class="resource-card">
-        <div class="res-icon-row"><div class="res-icon">⚖️</div><span class="res-type guide">Guide</span></div>
-        <h3>Trademark Registration: A Complete Guide for Creatives</h3>
-        <p>How to register your brand name, logo, and creative identity with the Nigerian Trademarks Registry.</p>
-        <div class="res-cta">Download Guide ↗</div>
-      </a>
-      <a href="#" class="resource-card">
+      <a href="funding-pathways.html" class="resource-card">
         <div class="res-icon-row"><div class="res-icon">🏦</div><span class="res-type article">Article</span></div>
         <h3>Funding Pathways for Creatives: Using IP to Raise Capital</h3>
         <p>An in-depth look at how films, music catalogues, and literary works can be used to access structured finance.</p>
         <div class="res-cta">Read Article ↗</div>
       </a>
-      <a href="#" class="resource-card">
-        <div class="res-icon-row"><div class="res-icon">📄</div><span class="res-type template">Template</span></div>
-        <h3>IP Licensing Agreement Template</h3>
-        <p>A customisable licensing agreement template for creatives granting usage rights to third parties.</p>
-        <div class="res-cta">Download Template ↗</div>
-      </a>
-      <a href="#" class="resource-card">
-        <div class="res-icon-row"><div class="res-icon">🎙️</div><span class="res-type video">Video</span></div>
-        <h3>Case Study: How a Nigerian Filmmaker Monetised Their IP Rights</h3>
-        <p>A real-life case discussion walking through how one filmmaker structured their IP to access a co-production deal.</p>
-        <div class="res-cta">Watch Case Study ↗</div>
-      </a>
-      <a href="#" class="resource-card">
+      <a href="understanding-wipo.html" class="resource-card">
         <div class="res-icon-row"><div class="res-icon">🌍</div><span class="res-type article">Article</span></div>
         <h3>Understanding the WIPO: What It Means for African Creatives</h3>
         <p>An overview of how the World Intellectual Property Organization frameworks apply to Nigerian and African IP holders.</p>
         <div class="res-cta">Read Article ↗</div>
       </a>
-      <a href="#" class="resource-card">
+      <a href="legal-structure.html" class="resource-card">
         <div class="res-icon-row"><div class="res-icon">💼</div><span class="res-type guide">Guide</span></div>
         <h3>Setting Up the Right Legal Structure for Your Creative Business</h3>
         <p>From sole proprietorships to incorporated companies — choosing the right structure to protect and grow your IP.</p>
-        <div class="res-cta">Download Guide ↗</div>
+        <div class="res-cta">Read Guide ↗</div>
       </a>
     </div>
     <div class="cta-strip">
